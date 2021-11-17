@@ -1,0 +1,21 @@
+.finally-footer{
+  height: 60px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+}
+
+.finally-footer__text{
+  margin: 0;
+  width: 100%;
+  color: #5A5555;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.finally-footer a{
+  text-decoration: none;
+  color: #2E67BE;
+}

@@ -10,6 +10,10 @@ const routes: Routes = [
     path:'', component: LoginComponent
   },
   {
+    path:'panel-usuario',
+    loadChildren: () => import('./panel-user/panel-user.module').then(mod => mod.PanelUserModule)
+  },
+  {
     path:'**', redirectTo:''
   }
 ];

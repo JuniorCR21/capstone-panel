@@ -10,11 +10,13 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { CityService } from './shared/services/city.service';
 import { ProfileService } from './shared/services/profile.service';
+import { PanelUserComponent } from './panel-user/panel-user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    PanelUserComponent
   ],
   imports: [
     BrowserModule,

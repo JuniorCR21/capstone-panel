@@ -5,6 +5,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { CityService } from 'src/app/shared/services/city.service';
 import Swal from 'sweetalert2';
+import { LoginService } from '../core/services/login.service';
 import { Direccion } from '../shared/models/direccion';
 import { Profile } from '../shared/models/profile';
 import { Usuario } from '../shared/models/usuario';
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
   provincias: any = []; provincia:any;
   distritos: any = []; distrito:any;
   formRegister:FormGroup;
-  carga=false;
+  formlogin:FormGroup;
+  carga=false; cargaModal=false;
   genero="";
 
   constructor(
@@ -32,6 +34,7 @@ export class LoginComponent implements OnInit {
     private toastr: ToastrService,
     private profileService:ProfileService,
     private router:Router,
+    private loginService: LoginService
     ) { }
 
   ngOnInit(): void {
@@ -48,25 +51,67 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required]],
       r_password: ['', [Validators.required]],
     });
+    this.formlogin = this.formBuilder.group({
+      dni: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required]],
+    })
+  }
+
+  loginUser(){
+    if (this.formlogin.invalid == true) {
+      this.toastr.error('Complete los campos requeridos', 'Error', {
+        timeOut: 3000,
+        progressBar: true,
+        progressAnimation: 'increasing',
+      });
+    }else{
+      this.carga = true;
+      let user = new Usuario();
+      user.dni = this.formlogin.get('dni').value;
+      user.password = this.formlogin.get('password').value;
+      this.loginService.postLogin(user).subscribe(
+        (userProfile) => {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Sesión Iniciada',
+            text: `Bienvenido ${userProfile.nombre} ${userProfile.apellido_paterno} ${userProfile.apellido_materno}`,
+            showConfirmButton: false,
+            timer: 2000,
+          });
+          this.loginService.saveLogin(userProfile);
+          this.limpiarCamposLogin();
+          this.carga = false;
+          this.router.navigateByUrl("/panel-usuario")
+        },(error) => {
+          this.carga=false;
+          this.toastr.error('Vuelva a intentar', 'Error', {
+            timeOut: 3000,
+            progressBar: true,
+            progressAnimation: 'increasing',
+          });
+        }
+      )
+    }
   }
 
   registerUser(){
     if (this.formRegister.invalid == true || this.genero == "") {
       this.toastr.error('Complete los campos requeridos', 'Error', {
-        timeOut: 2000,
+        timeOut: 3000,
         progressBar: true,
         progressAnimation: 'increasing',
       });
     }
     else if(this.formRegister.get('password').value != this.formRegister.get('r_password').value){
       this.toastr.error('Las contraseñas no coinciden', 'Error', {
-        timeOut: 2000,
+        timeOut: 3000,
         progressBar: true,
         progressAnimation: 'increasing',
       });
     }
     else{
-      this.carga=true;
+      this.cargaModal=true;
       let profile = new Profile();
       let user = new Usuario();
       let dir = new Direccion();
@@ -90,18 +135,18 @@ export class LoginComponent implements OnInit {
           Swal.fire({
             position: 'center',
             icon: 'success',
-            title: 'Enviado',
-            text: `Usuario Creado`,
+            title: 'Registro Completado',
+            text: `Bienvenido a la familia ${userProfile.nombre} ${userProfile.apellido_paterno} ${userProfile.apellido_materno}`,
             showConfirmButton: false,
-            timer: 1500,
+            timer: 2000,
           });
-          this.carga=false;
+          this.cargaModal=false;
           this.closeModal();
           this.limpiarCamposRegister();
         },(error) => {
           this.carga=false;
           this.toastr.error('Vuelva a intentar', 'Error', {
-            timeOut: 2000,
+            timeOut: 3000,
             progressBar: true,
             progressAnimation: 'increasing',
           });
@@ -111,11 +156,18 @@ export class LoginComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template,{id:1 ,class: 'modal-lg' , backdrop:'static'});
+    this.modalRef = this.modalService.show(template,{id:1 ,class: 'modal-lg' });
   }
 
   closeModal(){
     this.modalRef?.hide();
+  }
+
+  limpiarCamposLogin() {
+    this.formRegister.patchValue({
+      dni: '',
+      password: '',
+    });
   }
 
   limpiarCamposRegister() {

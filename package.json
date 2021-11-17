@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~10.2.4",
+    "@angular/animations": "^10.2.5",
     "@angular/common": "~10.2.4",
     "@angular/compiler": "~10.2.4",
     "@angular/core": "~10.2.4",
@@ -22,7 +22,7 @@
     "bootstrap": "^4.6.0",
     "jquery": "^3.6.0",
     "ngx-bootstrap": "^6.2.0",
-    "ngx-toastr": "^14.2.0",
+    "ngx-toastr": "^13.2.1",
     "popper.js": "^1.16.1",
     "rxjs": "~6.6.0",
     "sweetalert2": "^11.1.10",

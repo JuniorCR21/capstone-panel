@@ -15,6 +15,6 @@ export class ProfileService {
   constructor(private httpCliente: HttpClient) { }
 
   guardarPerfil(profile:Profile):Observable<any>{
-    return this.httpCliente.post<any>(`${this.url}/profile`, profile, {headers: this.httpHeaders});
+    return this.httpCliente.post<any>(`${this.url}/profile/`, profile, {headers: this.httpHeaders});
   }
 }

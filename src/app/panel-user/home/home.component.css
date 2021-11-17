@@ -1,0 +1,87 @@
+.home{
+  background-color: #F1F4F5;
+}
+
+.card-hospi{
+  background-color: #16A0DB;
+}
+
+.title-card{
+  margin: 0;
+  color: #fff;
+  font-size: 12px;
+  background-color: #058CC6;
+  padding: 10px 20px 10px 10px;
+  border-bottom-right-radius: 20px;
+}
+
+.title-hospi{
+  font-weight: 600;
+  color: #fff;
+}
+
+.text-hospi{
+  font-weight: 300;
+  font-size: 14px;
+  color: #fff;
+  text-align: right;
+}
+
+.text-wspp{
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.btn-wspp{
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+  border: 2px solid #fff;
+  padding: 4px 7px;
+  border-radius: 5px;
+}
+
+.btn-wspp:hover{
+  background-color: #fff;
+  color: #16A0DB;
+  transition: .3s all ease-in-out;
+}
+
+.card-img-citas{
+  width: 100%;
+  height: 28vh;
+  background-image: url('../../../assets/img/citas/citas.jpg');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.card-img-doc{
+  width: 100%;
+  height: 28vh;
+  background-image: url('../../../assets/img/citas/documentos.jpg');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.btn-cita{
+  background-color: #fff;
+  border: 2px solid #058CC6;
+  font-size: 14px;
+  border-radius: 5px;
+  padding: 4px 12px;
+  color: #058CC6;
+}
+
+.btn-cita:hover{
+  background-color: #058CC6;
+  color: #fff;
+  transition: .3s all ease-in-out;
+}
+
+.subtitle-citas{
+  font-size: 12px;
+  color: #16A0DB;
+}

@@ -1,0 +1,114 @@
+.pre-nav{
+  width: 100%;
+  height: 16px;
+  background: rgba(255,94,31,1);
+  background: -moz-linear-gradient(-45deg, rgba(60, 178, 231,1) 0%, rgba(60, 178, 231,1) 50%, rgba(9, 131, 196,1) 50%, rgba(9, 131, 196,1) 100%);
+  background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(60, 178, 231,1)), color-stop(50%, rgba(60, 178, 231,1)), color-stop(50%, rgba(9, 131, 196,1)), color-stop(100%, rgba(9, 131, 196,1)));
+  background: -webkit-linear-gradient(-45deg, rgba(60, 178, 231,1) 0%, rgba(60, 178, 231,1) 50%, rgba(9, 131, 196,1) 50%, rgba(9, 131, 196,1) 100%);
+  background: -o-linear-gradient(-45deg, rgba(60, 178, 231,1) 0%, rgba(60, 178, 231,1) 50%, rgba(9, 131, 196,1) 50%, rgba(9, 131, 196,1) 100%);
+  background: -ms-linear-gradient(-45deg, rgba(60, 178, 231,1) 0%, rgba(60, 178, 231,1) 50%, rgba(9, 131, 196,1) 50%, rgba(9, 131, 196,1) 100%);
+  background: linear-gradient(135deg, rgba(60, 178, 231,1) 0%, rgba(60, 178, 231,1) 50%, rgba(9, 131, 196,1) 50%, rgba(9, 131, 196,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3cb2e7', endColorstr='#0983c4', GradientType=1 );
+  color: white;
+}
+
+.navbarLg{
+  background-color: #fff;
+  position: relative;
+  z-index: 10;
+  padding: 1% 0;
+}
+.logo{
+  width: 65px;
+}
+
+.navbarLg .item-nav a{
+  color: rgb(139, 139, 139);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.div-nav{
+  display: inline-block;
+  padding: 0 15px;
+  cursor: pointer;
+}
+
+.navbarLg .item-nav .div-nav a{
+  text-decoration: none;
+}
+
+.navbarLg .item-nav .div-nav:hover a{
+  color: #3F3D56;
+  transition: .2s all ease-in-out;
+}
+
+
+.content-navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn{
+  background-color: #0575E6;
+  padding: 5px 18px;
+}
+
+.dropdown{
+  display: inline-block;
+}
+
+.dropdown-item{
+  font-size: 14px;
+}
+
+.icon-perfil{
+  cursor: pointer;
+  border: 2px solid #0982C3;
+  border-radius: 50%;
+  padding: 5px 10px;
+  font-size: 17px;
+  color: #0982C3;
+}
+
+.icon-perfil:hover{
+  background-color: #0982C3;
+  color: #fff;
+  transition: .3s all ease-in-out;
+}
+
+.call{
+  border: 2px solid #0982C3;
+  border-radius: 10px;
+  padding: 4px 12px;
+  text-decoration: none;
+  color: #0982C3;
+}
+
+.call:hover{
+  background-color: #0982C3;
+  color: #fff;
+  transition: .3s all ease-in-out;
+}
+
+
+@media only screen and (max-width:767px){
+  .navbarLg{
+    display: none;
+  }
+
+  .navbar .navbar-nav .active::after{
+    content: '';
+    width: 8%;
+    height: 2px;
+    background-color: #215FE9;
+    display: block;
+  }
+
+  .pre-nav{
+    height: 10px;
+  }
+
+}
+
