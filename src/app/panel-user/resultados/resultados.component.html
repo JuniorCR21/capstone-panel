@@ -1,0 +1,104 @@
+<div class="carga" *ngIf="carga==true">
+  <img src="../../../assets/img/login/loading.svg" width="80" alt="Carga">
+</div>
+<app-navbar></app-navbar>
+<section class="citas">
+  <div class="container pt-5 pb-4">
+    <div class="header mt-2">
+      <div class="banner-header">
+        <h3>Mis Resultados</h3>
+        <small class="text-muted">{{ day | date:'medium' }}</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="citas pb-5">
+  <div *ngIf="citas.length > 0 else citasNull">
+    <div class="container">
+          <div class="card card-body border-0 shadow">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="thead-light text-center">
+                  <tr>
+                    <th scope="col">N°</th>
+                    <th scope="col">Entidad</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Tipo de Atención</th>
+                    <th scope="col">Prueba Covid</th>
+                    <th scope="col">Comentario</th>
+                    <th scope="col">Responsable</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Acción</th>
+                  </tr>
+                </thead>
+                <tbody class="text-center">
+                  <tr *ngFor="let cita of citas">
+                    <th scope="row">{{cita.id}}</th>
+                    <td>{{cita.tipo_usuario}}</td>
+                    <td>{{cita.fecha}}</td>
+                    <td>{{cita.tipo_atencion}}</td>
+                    <td>
+                      <span class="badge badge-pill badge-secondary">{{cita.prueba_covid}}</span>
+                    </td>
+                    <td>{{cita.responsable}}</td>
+                    <td>{{cita.comentario}}</td>
+                    <td>
+                      <span class="badge badge-pill badge-info">{{cita.status}}</span>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-info">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <circle cx="12" cy="12" r="2" />
+                            <path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7" />
+                          </svg>
+                        </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+      <div class="p-5"></div>
+    </div>
+  </div>
+
+</section>
+<app-footer></app-footer>
+
+<ng-template #citasNull>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card card-body border-0 card-hospi p-0">
+          <div>
+            <label class="title-card">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-building-hospital" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <line x1="3" y1="21" x2="21" y2="21" />
+                <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" />
+                <path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4" />
+                <line x1="10" y1="9" x2="14" y2="9" />
+                <line x1="12" y1="7" x2="12" y2="11" />
+              </svg>
+              AÚN NO CUENTAS CON RESULTADOS REGISTRADOS
+            </label>
+          </div>
+          <h6 class="p-4 title-hospi">Estás a un paso de
+            agendar una cita</h6>
+          <p class="pl-4 pr-4 pb-4 text-hospi">Puedes venir aquí cuando tengas más de una cita atendida,
+            para tu familia y/o empresa. Las citas
+            que vayas completando se irán guardando en el
+            historial de citas pasadas o resultados para que las puedas
+            consultar más adelante.</p>
+          <div class="text-right pl-4 pr-4 pb-5">
+            <p class="text-wspp mb-2"><i class="fab fa-whatsapp"></i> Whatsapp</p>
+            <a class="btn-wspp" target="_blank" href="https://api.whatsapp.com/send?phone=+51%20953460711&text=Hola,%C2%A0%C2%BFMe%C2%A0comunico%C2%A0con%C2%A0Family%C2%A0Medical%C2%A0Center?">953460711</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="p-4"></div>
+  </div>
+</ng-template>

@@ -26,6 +26,7 @@ export class CitasComponent implements OnInit {
   tipoAtencion=0;
   covid="";
   carga=false;
+  viewCitas=true;
   formCita:FormGroup;
   fechaCita:Date = new Date(); date:Date = new Date();
   constructor(private modalService: BsModalService,
@@ -34,7 +35,6 @@ export class CitasComponent implements OnInit {
               private toastr: ToastrService,) { }
 
   ngOnInit(): void {
-    this.carga=true;
     this.formCita = this.formBuilder.group({
       responsable: [''],
       consulta: [''],
@@ -63,8 +63,21 @@ export class CitasComponent implements OnInit {
   }
 
   listarCitas(){
+    this.carga=true;
     this.citaService.getCitasUsuario().subscribe(
       response => {
+        this.viewCitas=true;
+        this.citas = response;
+        this.carga = false;
+      }
+    )
+  }
+
+  listarCitasPasadas(){
+    this.carga=true;
+    this.citaService.getCitasPasadasUsuario().subscribe(
+      response => {
+        this.viewCitas=false;
         this.citas = response;
         this.carga = false;
       }
@@ -90,7 +103,6 @@ export class CitasComponent implements OnInit {
       cita.nombre = profile.nombre + profile.apellido_paterno;
       cita.prueba_covid = this.covid;
       cita.responsable = this.formCita.get('responsable').value;
-      console.log(cita)
       this.citaService.postCita(cita).subscribe(
         response =>{
           Swal.fire({
@@ -103,7 +115,6 @@ export class CitasComponent implements OnInit {
           });
           this.listarCitas();
           this.closeModal();
-          this.carga = false;
           this.limpiarCamposCita();
         },(error) => {
           this.carga=false;
@@ -115,6 +126,39 @@ export class CitasComponent implements OnInit {
         }
       )
     }
+  }
+
+  cancelarCita(id){
+    Swal.fire({
+      title: 'Cancelar Cita?',
+      text: "Estás a punto de cancelar cita reservada",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#28A745',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, cancelar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.carga=true;
+        this.citaService.cancelCita(id).subscribe(
+          response =>{
+            this.listarCitas();
+            Swal.fire(
+              'Cancelado!',
+              `Tu cita del día ${response.fecha} fue cancelada`,
+              'success'
+            )
+          },(error) => {
+            this.carga=false;
+            this.toastr.error('Vuelva a intentar', 'Error', {
+              timeOut: 3000,
+              progressBar: true,
+              progressAnimation: 'increasing',
+            });
+          }
+        )
+      }
+    })
   }
 
   limpiarCamposCita() {

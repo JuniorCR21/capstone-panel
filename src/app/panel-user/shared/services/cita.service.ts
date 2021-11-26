@@ -31,12 +31,36 @@ export class CitaService {
     return this.httpCliente.get<CitaResponse[]>(`${this.url}/citas/${profile.id}`, {headers: headers})
   }
 
+  getCitasAtendidas():Observable<CitaResponse[]>{
+    let profile = JSON.parse(localStorage.getItem('profile'));
+    let headers = new HttpHeaders()
+    headers=headers.append('content-type','application/json');
+    headers=headers.append('Authorization', `Bearer ${profile.token}`);
+    return this.httpCliente.get<CitaResponse[]>(`${this.url}/citas/attend/${profile.id}`, {headers: headers})
+  }
+
+  getCitasPasadasUsuario():Observable<CitaResponse[]>{
+    let profile = JSON.parse(localStorage.getItem('profile'));
+    let headers = new HttpHeaders()
+    headers=headers.append('content-type','application/json');
+    headers=headers.append('Authorization', `Bearer ${profile.token}`);
+    return this.httpCliente.get<CitaResponse[]>(`${this.url}/citas/past/${profile.id}`, {headers: headers})
+  }
+
   postCita(cita):Observable<CitaResponse>{
     let profile = JSON.parse(localStorage.getItem('profile'));
     let headers = new HttpHeaders()
     headers=headers.append('content-type','application/json');
     headers=headers.append('Authorization', `Bearer ${profile.token}`);
     return this.httpCliente.post<CitaResponse>(`${this.url}/citas/`, cita, {headers: headers})
+  }
+
+  cancelCita(id):Observable<CitaResponse>{
+    let profile = JSON.parse(localStorage.getItem('profile'));
+    let headers = new HttpHeaders()
+    headers=headers.append('content-type','application/json');
+    headers=headers.append('Authorization', `Bearer ${profile.token}`);
+    return this.httpCliente.get<CitaResponse>(`${this.url}/citas/cancel/${id}`, {headers: headers})
   }
 
 }
